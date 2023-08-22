@@ -19,5 +19,44 @@ namespace GymWeb.Controllers
             
             return View(objWorkoutPlansList);
         }
+
+        public IActionResult Create() 
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Create(WorkoutPlan obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.WorkoutPlans.Add(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index"); // If need to redirect to another controller write ("Index","Controller")
+            }
+            return View();
+        }
+
+        public IActionResult Edit(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            WorkoutPlan? workoutPlan = _db.WorkoutPlans.FirstOrDefault(u=>u.Id == id);
+            if (workoutPlan == null)
+            {
+                return NotFound();
+            }
+
+            return View(workoutPlan);
+        }
+        [HttpPost]
+        public IActionResult Edit(WorkoutPlan obj)
+        {
+
+            return View();
+        }
+
     }
 }

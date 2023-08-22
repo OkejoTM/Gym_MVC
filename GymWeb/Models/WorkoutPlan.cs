@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace GymWeb.Models
 {
@@ -6,9 +7,13 @@ namespace GymWeb.Models
     {
         [Key]      
         public  int Id { get; set; }
+
+        [DisplayName("Chose Date and Time")]
         [Required]
         public DateTime Date { get; set; }
-        [StringLength(maximumLength:120)]
+
+        [DisplayName("Write Some Notes")]
+        [MaxLength(120, ErrorMessage="Maximum length is 120 symbols!")]        
         public string Notes { get; set; }
 
     }
