@@ -54,9 +54,45 @@ namespace GymWeb.Controllers
         [HttpPost]
         public IActionResult Edit(WorkoutPlan obj)
         {
-
+            if (ModelState.IsValid)
+            {
+                _db.WorkoutPlans.Update(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
             return View();
         }
+
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            WorkoutPlan? workoutPlan = _db.WorkoutPlans.FirstOrDefault(u => u.Id == id);
+            if (workoutPlan == null)
+            {
+                return NotFound();
+            }
+
+            return View(workoutPlan);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeletePOST(int? id)
+        {
+            WorkoutPlan? obj = _db.WorkoutPlans.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            _db.WorkoutPlans.Remove(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+
 
     }
 }
