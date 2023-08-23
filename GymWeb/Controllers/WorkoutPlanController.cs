@@ -31,6 +31,7 @@ namespace GymWeb.Controllers
             {
                 _db.WorkoutPlans.Add(obj);
                 _db.SaveChanges();
+                TempData["success"] = "Workout Plan created successfully";
                 return RedirectToAction("Index"); // If need to redirect to another controller write ("Index","Controller")
             }
             return View();
@@ -58,11 +59,12 @@ namespace GymWeb.Controllers
             {
                 _db.WorkoutPlans.Update(obj);
                 _db.SaveChanges();
+                TempData["success"] = "Workout Plan updated successfully";
                 return RedirectToAction("Index");
             }
             return View();
         }
-
+        
         public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
@@ -89,6 +91,7 @@ namespace GymWeb.Controllers
             }
             _db.WorkoutPlans.Remove(obj);
             _db.SaveChanges();
+            TempData["success"] = "Workout Plan deleted successfully";
             return RedirectToAction("Index");
         }
 
