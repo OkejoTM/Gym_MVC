@@ -7,7 +7,7 @@ namespace GymWebRazor_Temp.Data
     {
         public ApplicationRazorDbContext(DbContextOptions<ApplicationRazorDbContext> options) : base(options) { }       
 
-        DbSet<WorkoutPlan> WorkoutPlans { get; set; }
+        public DbSet<WorkoutPlan> WorkoutPlans { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

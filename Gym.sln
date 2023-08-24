@@ -5,7 +5,7 @@ VisualStudioVersion = 17.7.34003.232
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymWeb", "GymWeb\GymWeb.csproj", "{509D32E2-9335-446D-B29C-58ABC111C73C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymWebRazor_Temp", "GymWebRazor_Temp\GymWebRazor_Temp.csproj", "{D9B99C10-D4B2-48FE-A30D-B18D3397D92C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymWebRazor_Temp", "GymWebRazor_Temp\GymWebRazor_Temp.csproj", "{D9B99C10-D4B2-48FE-A30D-B18D3397D92C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
