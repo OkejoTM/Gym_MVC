@@ -30,6 +30,7 @@ namespace GymWebRazor_Temp.Pages.WorkoutPlans
             {            
                 _db.WorkoutPlans.Remove(WorkoutPlan);
                 _db.SaveChanges();
+                TempData["success"] = "Workout plan deleted successfuly";
                 return RedirectToPage("Index");
             }
             return NotFound();

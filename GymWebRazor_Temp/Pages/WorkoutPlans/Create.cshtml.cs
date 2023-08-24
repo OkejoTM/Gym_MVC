@@ -25,6 +25,7 @@ namespace GymWebRazor_Temp.Pages.WorkoutPlans
         {
             _db.WorkoutPlans.Add(WorkoutPlan);
             _db.SaveChanges();
+            TempData["success"] = "Workout plan created successfuly";
             return RedirectToPage("Index");  
         }
     }
