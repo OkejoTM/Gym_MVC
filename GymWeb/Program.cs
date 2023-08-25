@@ -1,4 +1,4 @@
-using GymWeb.Data;
+using Gym.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

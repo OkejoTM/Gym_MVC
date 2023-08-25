@@ -1,5 +1,5 @@
-﻿using GymWeb.Data;
-using GymWeb.Models;
+﻿using Gym.DataAccess.Data;
+using Gym.Models;
 using Microsoft.AspNetCore.Mvc;
 
 

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace GymWeb.Migrations
+namespace Gym.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class SeedWorkoutPlansTable : Migration

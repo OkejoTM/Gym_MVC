@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace GymWeb.Migrations
+namespace Gym.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class AddWorkoutPlansMigration : Migration

@@ -1,7 +1,7 @@
-﻿using GymWeb.Models;
+﻿using Gym.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace GymWeb.Data
+namespace Gym.DataAccess.Data
 {
     public class ApplicationDBContext : DbContext
     {
