@@ -1,21 +1,24 @@
 ﻿using Gym.DataAccess.Data;
 using Gym.Models;
+using Gym.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
+
 
 
 namespace GymWeb.Controllers
 {
     public class WorkoutPlanController : Controller
     {
-        private readonly ApplicationDBContext _db;
-        public WorkoutPlanController(ApplicationDBContext db)
+        private readonly IWorkoutPlanRepository _workoutPlanRepository;
+
+        public WorkoutPlanController(IWorkoutPlanRepository workoutPlanRepository)
         {
-            _db = db;
+            _workoutPlanRepository = workoutPlanRepository;
         }
 
         public IActionResult Index()
         {
-            List<WorkoutPlan> objWorkoutPlansList = _db.WorkoutPlans.ToList();
+            List<WorkoutPlan> objWorkoutPlansList = _workoutPlanRepository.GetAll().ToList();
             
             return View(objWorkoutPlansList);
         }
@@ -29,8 +32,8 @@ namespace GymWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.WorkoutPlans.Add(obj);
-                _db.SaveChanges();
+                _workoutPlanRepository.Add(obj);
+                _workoutPlanRepository.Save();
                 TempData["success"] = "Workout Plan created successfully";
                 return RedirectToAction("Index"); // If need to redirect to another controller write ("Index","Controller")
             }
@@ -44,7 +47,7 @@ namespace GymWeb.Controllers
                 return NotFound();
             }
 
-            WorkoutPlan? workoutPlan = _db.WorkoutPlans.FirstOrDefault(u=>u.Id == id);
+            WorkoutPlan? workoutPlan = _workoutPlanRepository.Get(u=>u.Id == id);
             if (workoutPlan == null)
             {
                 return NotFound();
@@ -57,8 +60,8 @@ namespace GymWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.WorkoutPlans.Update(obj);
-                _db.SaveChanges();
+                _workoutPlanRepository.Update(obj);
+                _workoutPlanRepository.Save();
                 TempData["success"] = "Workout Plan updated successfully";
                 return RedirectToAction("Index");
             }
@@ -72,7 +75,7 @@ namespace GymWeb.Controllers
                 return NotFound();
             }
 
-            WorkoutPlan? workoutPlan = _db.WorkoutPlans.FirstOrDefault(u => u.Id == id);
+            WorkoutPlan? workoutPlan = _workoutPlanRepository.Get(u => u.Id == id);
             if (workoutPlan == null)
             {
                 return NotFound();
@@ -84,13 +87,13 @@ namespace GymWeb.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeletePOST(int? id)
         {
-            WorkoutPlan? obj = _db.WorkoutPlans.Find(id);
+            WorkoutPlan? obj = _workoutPlanRepository.Get(u=>u.Id == id);
             if (obj == null)
             {
                 return NotFound();
             }
-            _db.WorkoutPlans.Remove(obj);
-            _db.SaveChanges();
+            _workoutPlanRepository.Remove(obj);
+            _workoutPlanRepository.Save();
             TempData["success"] = "Workout Plan deleted successfully";
             return RedirectToAction("Index");
         }
