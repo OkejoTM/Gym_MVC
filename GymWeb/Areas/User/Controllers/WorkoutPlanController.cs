@@ -3,10 +3,9 @@ using Gym.Models;
 using Gym.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 
-
-
-namespace GymWeb.Controllers
+namespace GymWeb.Areas.User.Controllers
 {
+    [Area("User")]
     public class WorkoutPlanController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -19,11 +18,11 @@ namespace GymWeb.Controllers
         public IActionResult Index()
         {
             List<WorkoutPlan> objWorkoutPlansList = _unitOfWork.WorkoutPlan.GetAll().ToList();
-            
+
             return View(objWorkoutPlansList);
         }
 
-        public IActionResult Create() 
+        public IActionResult Create()
         {
             return View();
         }
@@ -47,7 +46,7 @@ namespace GymWeb.Controllers
                 return NotFound();
             }
 
-            WorkoutPlan? workoutPlan = _unitOfWork.WorkoutPlan.Get(u=>u.Id == id);
+            WorkoutPlan? workoutPlan = _unitOfWork.WorkoutPlan.Get(u => u.Id == id);
             if (workoutPlan == null)
             {
                 return NotFound();
@@ -67,7 +66,7 @@ namespace GymWeb.Controllers
             }
             return View();
         }
-        
+
         public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
@@ -87,7 +86,7 @@ namespace GymWeb.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeletePOST(int? id)
         {
-            WorkoutPlan? obj = _unitOfWork.WorkoutPlan.Get(u=>u.Id == id);
+            WorkoutPlan? obj = _unitOfWork.WorkoutPlan.Get(u => u.Id == id);
             if (obj == null)
             {
                 return NotFound();
