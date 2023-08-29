@@ -9,6 +9,7 @@ namespace Gym.DataAccess.Repository.IRepository
     public interface IUnitOfWork
     {
         IWorkoutPlanRepository WorkoutPlan{ get; }
+        IWorkoutDetailsRepository WorkoutDetails { get; } 
         void Save();
         
     }
