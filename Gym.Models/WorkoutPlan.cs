@@ -16,5 +16,6 @@ namespace Gym.Models
         [MaxLength(120, ErrorMessage = "Maximum length is 120 symbols!")]
         public string Notes { get; set; }
 
+        public virtual ICollection<WorkoutDetails> Details { get; } = new List<WorkoutDetails>();
     }
 }

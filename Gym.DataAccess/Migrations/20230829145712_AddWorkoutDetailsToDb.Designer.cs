@@ -4,6 +4,7 @@ using Gym.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gym.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230829145712_AddWorkoutDetailsToDb")]
+    partial class AddWorkoutDetailsToDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,38 +60,6 @@ namespace Gym.DataAccess.Migrations
                     b.HasIndex("WorkoutPlanId");
 
                     b.ToTable("WorkoutDetails");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Muscle = "Back",
-                            Name = "Deadlift",
-                            Reps = "12/10/8",
-                            Sets = 3,
-                            Weight = "60/70/80",
-                            WorkoutPlanId = 2
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Muscle = "Chest",
-                            Name = "Chest Press",
-                            Reps = "12/10/8/6",
-                            Sets = 4,
-                            Weight = "60/70/80/90",
-                            WorkoutPlanId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Muscle = "Legs",
-                            Name = "Squads",
-                            Reps = "12/10/8",
-                            Sets = 3,
-                            Weight = "60/70/80",
-                            WorkoutPlanId = 3
-                        });
                 });
 
             modelBuilder.Entity("Gym.Models.WorkoutPlan", b =>
