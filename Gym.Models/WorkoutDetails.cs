@@ -18,16 +18,20 @@ namespace Gym.Models
         [DisplayName("Name Of Excercise")]                
         public string Name { get; set; }
         [Required]
+        [DisplayName("Muscle")]
         public string Muscle { get; set; }
         [Required]
+        [DisplayName("Sets")]
         public int Sets { get; set; }
-        [Required]  
+        [Required]
+        [DisplayName("Reps")]
         public string Reps { get; set; }
         [Required]
+        [DisplayName("Weight")]
         public string Weight { get; set; }
 
-        [ForeignKey("WorkoutPlanId")]
         public int WorkoutPlanId { get; set; }
+        [ForeignKey("WorkoutPlanId")]
         public WorkoutPlan WorkoutPlan { get; set; } = null!;
 
     }

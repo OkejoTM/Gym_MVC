@@ -1,4 +1,5 @@
 using Gym.DataAccess.Data;
+using Gym.DataAccess.Repository;
 using Gym.DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 

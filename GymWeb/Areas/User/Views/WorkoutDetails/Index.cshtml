@@ -1,4 +1,4 @@
-﻿@model List<WorkoutPlan>
+﻿@model List<WorkoutDetails>
 
 <div class="card shadow border-0 mt-4" style="margin-bottom:2rem">
     <div class="card-header bg-secondary ml-0 py-3">
@@ -13,7 +13,7 @@
             <div class="col-6 ">
             </div>
             <div class="col-6 text-end">
-                <a asp-controller="WorkoutPlan" asp-action="Create" class="btn btn-primary">
+                <a asp-controller="WorkoutDetails" asp-action="Create" class="btn btn-primary">
                     <i class="bi bi-plus-circle"></i> Create New Workout Plan
                 </a>
             </div>
@@ -25,10 +25,19 @@
             <thead>
                 <tr>
                     <th>
-                        Date and Time
+                        Name
                     </th>
                     <th>
-                        Notes
+                        Muscle
+                    </th>
+                    <th>
+                        Sets
+                    </th>
+                    <th>
+                        Reps
+                    </th>
+                    <th>
+                        Weight
                     </th>
                     <th></th>
                 </tr>
@@ -37,19 +46,19 @@
                 @foreach (var obj in Model)
                 {
                     <tr>
-                        <td> @obj.Date </td>
-                        <td> @obj.Notes </td>
+                        <td> @obj.Name </td>
+                        <td> @obj.Muscle </td>
+                        <td> @obj.Sets </td>
+                        <td> @obj.Reps </td>
+                        <td> @obj.Weight </td>                       
                         <td>
                             <div class="w-75 btn-group" role="group">
-                                <a asp-controller="WorkoutPlan" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
+                                <a asp-controller="WorkoutDetails" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
                                     <i class="bi bi-pencil-square"></i>Edit
                                 </a>
-                                <a asp-controller="WorkoutPlan" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-danger mx-2">
+                                <a asp-controller="WorkoutDetails" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-danger mx-2">
                                     <i class="bi bi-trash3-fill"></i>Delete
-                                </a>
-                                <a asp-controller="WorkoutDetails" asp-action="Index" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
-                                    <i class="bi bi-book"></i> Details
-                                </a>
+                                </a>                                
                             </div>
                         </td>
                     </tr>
@@ -57,5 +66,10 @@
 
             </tbody>
         </table>
+        <div class="col-6 text-start">
+            <a asp-controller="WorkoutPlan" asp-action="Index" class="btn btn-primary">
+                <i class="bi bi-arrow-left"></i> Back to Workout Plan
+            </a>
+        </div>
     </div>
 </div>

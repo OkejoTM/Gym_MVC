@@ -27,8 +27,6 @@
     <Folder Include="Areas\Admin\Views\" />
     <Folder Include="Areas\Trainer\Controllers\" />
     <Folder Include="Areas\Trainer\Views\" />
-    <Folder Include="Areas\User\Controllers\" />
-    <Folder Include="Areas\User\Views\" />
   </ItemGroup>
 
 </Project>
