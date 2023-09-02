@@ -16,30 +16,41 @@ namespace GymWeb.Areas.User.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        public IActionResult Index(int? workoutPlanId)
+        public IActionResult Index(int? id)
         {
-            if (workoutPlanId != null && workoutPlanId != 0)
+            if (id != null && id != 0)
             {
-                List<WorkoutDetails> workoutDetails = _unitOfWork.WorkoutDetails.GetAll().ToList();
+                List<WorkoutDetails> workoutDetails = _unitOfWork.WorkoutDetails.GetAll().Where(u=>u.WorkoutPlanId==id).ToList();
+                ViewBag.WorkoutPlanId = id;
                 return View(workoutDetails);
             }
             return NotFound();
         }
 
 
-        public IActionResult Create()
+        public IActionResult Create(int? id)
         {
-            return View();
+            if (id != null && id != 0)
+            {
+                var viewModel = new WorkoutDetails
+                {
+                    WorkoutPlanId = (int)id
+                };
+                return View(viewModel);
+            }
+            return NotFound();
         }
         [HttpPost]
         public IActionResult Create(WorkoutDetails obj)
         {
+            obj.Id = 0;
+            ModelState.Remove("WorkoutPlan");
             if (ModelState.IsValid)
             {
                 _unitOfWork.WorkoutDetails.Add(obj);
                 _unitOfWork.Save();
                 TempData["success"] = "Deatils created successfuly";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = obj.WorkoutPlanId});
             }
             return View();
         }
@@ -67,7 +78,7 @@ namespace GymWeb.Areas.User.Controllers
                 _unitOfWork.WorkoutDetails.Remove(workoutDetails);
                 _unitOfWork.Save();
                 TempData["success"] = "Details deleted successfuly";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = workoutDetails.WorkoutPlanId});
             }
             return NotFound();
 
@@ -86,16 +97,24 @@ namespace GymWeb.Areas.User.Controllers
         [HttpPost]
         public IActionResult Edit(WorkoutDetails obj)
         {
+            obj.WorkoutPlan = _unitOfWork.WorkoutPlan.Get(u=>u.Id == obj.WorkoutPlanId);
+            if (obj.WorkoutPlan == null)
+            {
+                ModelState.AddModelError("WorkoutPlan", "WorkoutPlan is null");
+            }
+            ModelState.Remove("WorkoutPlan");
             if (ModelState.IsValid)
             {
                 _unitOfWork.WorkoutDetails.Update(obj);
                 _unitOfWork.Save();
                 TempData["success"] = "Deatils updated successfuly";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = obj.WorkoutPlanId });
             }
+            var errors = ModelState.Values.SelectMany(v => v.Errors);            
             return View();
         }
 
+        
 
 
 

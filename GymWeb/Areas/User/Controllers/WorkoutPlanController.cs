@@ -97,7 +97,7 @@ namespace GymWeb.Areas.User.Controllers
             return RedirectToAction("Index");
         }
 
-
+       
 
     }
 }
