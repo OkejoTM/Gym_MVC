@@ -1,6 +1,7 @@
 ﻿using Gym.DataAccess.Data;
 using Gym.DataAccess.Repository.IRepository;
 using Gym.Models;
+using Gym.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
@@ -20,9 +21,12 @@ namespace GymWeb.Areas.User.Controllers
         {
             if (id != null && id != 0)
             {
-                List<WorkoutDetails> workoutDetails = _unitOfWork.WorkoutDetails.GetAll().Where(u=>u.WorkoutPlanId==id).ToList();
-                ViewBag.WorkoutPlanId = id;
-                return View(workoutDetails);
+                WorkoutDetailsVM workoutDetailsVM = new()
+                {
+                    WorkoutDetailsList = _unitOfWork.WorkoutDetails.GetAll().Where(u => u.WorkoutPlanId == id).ToList(),
+                    WorkoutPlanId = (int)id
+                };                
+                return View(workoutDetailsVM);
             }
             return NotFound();
         }
@@ -35,7 +39,7 @@ namespace GymWeb.Areas.User.Controllers
                 var viewModel = new WorkoutDetails
                 {
                     WorkoutPlanId = (int)id
-                };
+                };                
                 return View(viewModel);
             }
             return NotFound();
@@ -43,8 +47,7 @@ namespace GymWeb.Areas.User.Controllers
         [HttpPost]
         public IActionResult Create(WorkoutDetails obj)
         {
-            obj.Id = 0;
-            ModelState.Remove("WorkoutPlan");
+            obj.Id = 0;            
             if (ModelState.IsValid)
             {
                 _unitOfWork.WorkoutDetails.Add(obj);
@@ -101,8 +104,7 @@ namespace GymWeb.Areas.User.Controllers
             if (obj.WorkoutPlan == null)
             {
                 ModelState.AddModelError("WorkoutPlan", "WorkoutPlan is null");
-            }
-            ModelState.Remove("WorkoutPlan");
+            }            
             if (ModelState.IsValid)
             {
                 _unitOfWork.WorkoutDetails.Update(obj);

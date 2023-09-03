@@ -1,4 +1,4 @@
-﻿@model List<WorkoutDetails>
+﻿@model WorkoutDetailsVM
 
 <div class="card shadow border-0 mt-4" style="margin-bottom:2rem">
     <div class="card-header bg-secondary ml-0 py-3">
@@ -13,7 +13,7 @@
             <div class="col-6 ">
             </div>
             <div class="col-6 text-end">
-                <a asp-controller="WorkoutDetails" asp-action="Create" asp-route-id=@ViewBag.WorkoutPlanId class="btn btn-primary">
+                <a asp-controller="WorkoutDetails" asp-action="Create" asp-route-id=@Model.WorkoutPlanId class="btn btn-primary">
                     <i class="bi bi-plus-circle"></i> Create New Workout Plan
                 </a>
             </div>
@@ -43,7 +43,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var obj in Model)
+                @foreach (var obj in Model.WorkoutDetailsList)
                 {
                     <tr>
                         <td> @obj.Name </td>

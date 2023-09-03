@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -31,7 +32,9 @@ namespace Gym.Models
         public string Weight { get; set; }
 
         public int WorkoutPlanId { get; set; }
-        [ForeignKey("WorkoutPlanId")]
+
+        [ValidateNever]
+        [ForeignKey("WorkoutPlanId")]        
         public WorkoutPlan WorkoutPlan { get; set; } = null!;
 
     }
