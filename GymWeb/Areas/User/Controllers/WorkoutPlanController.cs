@@ -22,16 +22,36 @@ namespace GymWeb.Areas.User.Controllers
             return View(objWorkoutPlansList);
         }
 
-        public IActionResult Create()
+        public IActionResult Upsert(int? id)
         {
-            return View();
+            WorkoutPlan workoutPlan;
+            if (id == null || id == 0)
+            {
+                // create
+                workoutPlan = new WorkoutPlan();
+                return View(workoutPlan);
+            }
+            else
+            {
+                // update
+                workoutPlan = _unitOfWork.WorkoutPlan.Get(u => u.Id == id);
+                return View(workoutPlan);                
+            }
+
         }
         [HttpPost]
-        public IActionResult Create(WorkoutPlan obj)
+        public IActionResult Upsert(WorkoutPlan obj)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.WorkoutPlan.Add(obj);
+                if (obj.Id == 0)
+                {
+                    _unitOfWork.WorkoutPlan.Add(obj);
+                }
+                else
+                {
+                    _unitOfWork.WorkoutPlan.Update(obj);
+                }
                 _unitOfWork.Save();
                 TempData["success"] = "Workout Plan created successfully";
                 return RedirectToAction("Index"); // If need to redirect to another controller write ("Index","Controller")
@@ -39,33 +59,7 @@ namespace GymWeb.Areas.User.Controllers
             return View();
         }
 
-        public IActionResult Edit(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-
-            WorkoutPlan? workoutPlan = _unitOfWork.WorkoutPlan.Get(u => u.Id == id);
-            if (workoutPlan == null)
-            {
-                return NotFound();
-            }
-
-            return View(workoutPlan);
-        }
-        [HttpPost]
-        public IActionResult Edit(WorkoutPlan obj)
-        {
-            if (ModelState.IsValid)
-            {
-                _unitOfWork.WorkoutPlan.Update(obj);
-                _unitOfWork.Save();
-                TempData["success"] = "Workout Plan updated successfully";
-                return RedirectToAction("Index");
-            }
-            return View();
-        }
+        
 
         public IActionResult Delete(int? id)
         {

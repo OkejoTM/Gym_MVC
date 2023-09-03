@@ -58,6 +58,34 @@ namespace GymWeb.Areas.User.Controllers
             return View();
         }
 
+        public IActionResult Edit(int? id)
+        {
+            WorkoutDetails workoutDetails = _unitOfWork.WorkoutDetails.Get(x=>x.Id == id);
+            if (workoutDetails != null)
+            {
+                return View(workoutDetails);
+            }
+            return NotFound();
+        }
+
+        [HttpPost]
+        public IActionResult Edit(WorkoutDetails obj)
+        {
+            obj.WorkoutPlan = _unitOfWork.WorkoutPlan.Get(u=>u.Id == obj.WorkoutPlanId);
+            if (obj.WorkoutPlan == null)
+            {
+                ModelState.AddModelError("WorkoutPlan", "WorkoutPlan is null");
+            }            
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.WorkoutDetails.Update(obj);
+                _unitOfWork.Save();
+                TempData["success"] = "Deatils updated successfuly";
+                return RedirectToAction("Index", new { id = obj.WorkoutPlanId });
+            }
+                     
+            return View();
+        }
 
         public IActionResult Delete(int? id)
         {
@@ -87,34 +115,6 @@ namespace GymWeb.Areas.User.Controllers
 
         }
 
-        public IActionResult Edit(int? id)
-        {
-            WorkoutDetails workoutDetails = _unitOfWork.WorkoutDetails.Get(x=>x.Id == id);
-            if (workoutDetails != null)
-            {
-                return View(workoutDetails);
-            }
-            return NotFound();
-        }
-
-        [HttpPost]
-        public IActionResult Edit(WorkoutDetails obj)
-        {
-            obj.WorkoutPlan = _unitOfWork.WorkoutPlan.Get(u=>u.Id == obj.WorkoutPlanId);
-            if (obj.WorkoutPlan == null)
-            {
-                ModelState.AddModelError("WorkoutPlan", "WorkoutPlan is null");
-            }            
-            if (ModelState.IsValid)
-            {
-                _unitOfWork.WorkoutDetails.Update(obj);
-                _unitOfWork.Save();
-                TempData["success"] = "Deatils updated successfuly";
-                return RedirectToAction("Index", new { id = obj.WorkoutPlanId });
-            }
-            var errors = ModelState.Values.SelectMany(v => v.Errors);            
-            return View();
-        }
 
         
 
