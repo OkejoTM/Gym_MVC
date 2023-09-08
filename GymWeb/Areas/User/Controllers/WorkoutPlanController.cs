@@ -61,37 +61,29 @@ namespace GymWeb.Areas.User.Controllers
 
         
 
+        #region API CALLS
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            List<WorkoutPlan> objWorkoutPlansList = _unitOfWork.WorkoutPlan.GetAll().ToList();
+            return Json(new { data = objWorkoutPlansList });
+        }   
+
+        [HttpDelete]
         public IActionResult Delete(int? id)
         {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-
-            WorkoutPlan? workoutPlan = _unitOfWork.WorkoutPlan.Get(u => u.Id == id);
-            if (workoutPlan == null)
-            {
-                return NotFound();
-            }
-
-            return View(workoutPlan);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        public IActionResult DeletePOST(int? id)
-        {
-            WorkoutPlan? obj = _unitOfWork.WorkoutPlan.Get(u => u.Id == id);
+            var obj = _unitOfWork.WorkoutPlan.Get(x => x.Id == id);
             if (obj == null)
             {
-                return NotFound();
+                return Json(new { success = false, message = "Error while deliting" });
             }
+
             _unitOfWork.WorkoutPlan.Remove(obj);
             _unitOfWork.Save();
-            TempData["success"] = "Workout Plan deleted successfully";
-            return RedirectToAction("Index");
+            return Json(new { success = true, message = "Delete successful!" });
         }
 
-       
-
+        #endregion
     }
 }

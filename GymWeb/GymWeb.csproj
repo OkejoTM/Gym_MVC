@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\workoutPlan.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\workoutPlan.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.10">
@@ -27,6 +35,10 @@
     <Folder Include="Areas\Admin\Views\" />
     <Folder Include="Areas\Trainer\Controllers\" />
     <Folder Include="Areas\Trainer\Views\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\workoutPlan.js" />
   </ItemGroup>
 
 </Project>
