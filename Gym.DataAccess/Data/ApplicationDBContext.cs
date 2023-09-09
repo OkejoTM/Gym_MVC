@@ -1,9 +1,11 @@
 ﻿using Gym.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Gym.DataAccess.Data
 {
-    public class ApplicationDBContext : DbContext
+    public class ApplicationDBContext : IdentityDbContext<IdentityUser>
     {
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options){ }
 
@@ -12,6 +14,8 @@ namespace Gym.DataAccess.Data
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<WorkoutPlan>().HasData(
                 new WorkoutPlan { Id = 1, Date = new DateTime(2023, 8, 1), Notes = "Today im david goggins"},
                 new WorkoutPlan { Id = 2, Date = new DateTime(2023, 8, 3), Notes = "Today im still david goggins" },
