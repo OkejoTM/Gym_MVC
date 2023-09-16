@@ -109,6 +109,8 @@ namespace GymWeb.Areas.Identity.Pages.Account
             [ValidateNever]
             public IEnumerable<SelectListItem> RoleList { get; set; }
 
+
+
         }
 
 
