@@ -2,10 +2,13 @@
 using Gym.Models;
 using Gym.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Gym.Utility;
 
 namespace GymWeb.Areas.User.Controllers
 {
     [Area("User")]
+    [Authorize(Roles = SD.ROLE_USER)]
     public class WorkoutPlanController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

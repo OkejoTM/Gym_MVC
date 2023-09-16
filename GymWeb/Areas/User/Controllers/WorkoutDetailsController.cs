@@ -2,12 +2,15 @@
 using Gym.DataAccess.Repository.IRepository;
 using Gym.Models;
 using Gym.Models.ViewModels;
+using Gym.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace GymWeb.Areas.User.Controllers
 {
     [Area("User")]
+    [Authorize(Roles = SD.ROLE_USER)]
     public class WorkoutDetailsController : Controller
     {        
         private readonly IUnitOfWork _unitOfWork;

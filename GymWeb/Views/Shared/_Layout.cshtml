@@ -26,9 +26,12 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area = "User" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area = "User" asp-controller="WorkoutPlan" asp-action="Index">WorkoutPlan</a>
-                        </li>
+                        @if (User.IsInRole(SD.ROLE_USER))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="User" asp-controller="WorkoutPlan" asp-action="Index">WorkoutPlan</a>
+                            </li>
+                        }                        
                         <li class="nav-item">
                             <a class="nav-link" asp-area = "User" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
