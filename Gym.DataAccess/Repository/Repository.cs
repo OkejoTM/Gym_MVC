@@ -35,6 +35,7 @@ namespace Gym.DataAccess.Repository
         public IEnumerable<T> GetAll()
         {
             IQueryable<T> query = dbSet;
+            
             return query.ToList();
         }
 

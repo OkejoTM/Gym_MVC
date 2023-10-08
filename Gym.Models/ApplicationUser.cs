@@ -9,9 +9,11 @@ using System.Threading.Tasks;
 namespace Gym.Models
 {
     public class ApplicationUser : IdentityUser
-    {
+    {       
         [Required]
-        public string Name { get; set; }        
+        public string Name { get; set; }      
+        
+        public virtual ICollection<WorkoutPlan> WorkoutPlans { get; } = new List<WorkoutPlan>();
          
     }
 }

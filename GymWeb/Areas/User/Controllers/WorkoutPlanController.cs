@@ -20,9 +20,10 @@ namespace GymWeb.Areas.User.Controllers
 
         public IActionResult Index()
         {
-            List<WorkoutPlan> objWorkoutPlansList = _unitOfWork.WorkoutPlan.GetAll().ToList();
 
+            List<WorkoutPlan> objWorkoutPlansList = _unitOfWork.WorkoutPlan.GetAll().ToList();
             return View(objWorkoutPlansList);
+
         }
 
         public IActionResult Upsert(int? id)

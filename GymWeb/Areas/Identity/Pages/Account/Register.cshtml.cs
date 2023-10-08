@@ -111,8 +111,7 @@ namespace GymWeb.Areas.Identity.Pages.Account
 
             [Required]
             public string? Name { get; set; }
-            public string? PhoneNumber { get; set; }
-            public string? UserName { get; set; }
+            public string? PhoneNumber { get; set; }            
 
 
         }
@@ -147,8 +146,8 @@ namespace GymWeb.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-                
-                await _userStore.SetUserNameAsync(user, Input.UserName, CancellationToken.None);
+
+                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 user.Name = Input.Name;                
                 user.PhoneNumber = Input.PhoneNumber;

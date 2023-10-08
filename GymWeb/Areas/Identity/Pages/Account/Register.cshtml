@@ -17,12 +17,7 @@
             <div class="col-md-12">
                 <form id="registerForm" class="row" asp-route-returnUrl="@Model.ReturnUrl" method="post">
                     <h3 class="border-bottom pb-3 mb-border-4 text-secondary text-center">Create a new account.</h3>                    
-                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-                    <div class="form-floating mb-3 col-md-12">
-                        <input asp-for="Input.UserName" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                        <label asp-for="Input.UserName" class="ms-2 text-muted">Login</label>
-                        <span asp-validation-for="Input.Email" class="text-danger"></span>
-                    </div>
+                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>                    
                     <div class="form-floating mb-3 col-md-12">
                         <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
                         <label asp-for="Input.Email" class="ms-2 text-muted">Email</label>
@@ -31,12 +26,12 @@
                     <div class="form-floating mb-3 col-md-12">
                         <input asp-for="Input.Name" class="form-control" aria-required="true" placeholder="" />
                         <label asp-for="Input.Name" class="ms-2 text-muted">Full Name</label>
-                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        <span asp-validation-for="Input.Name" class="text-danger"></span>
                     </div>
                     <div class="form-floating mb-3 col-md-12">
                         <input asp-for="Input.PhoneNumber" class="form-control" aria-required="true" placeholder="+7-900-333-12-12" />
                         <label asp-for="Input.PhoneNumber" class="ms-2 text-muted">Phone</label>
-                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
                     </div>
                     <div class="form-floating mb-3 col-md-6">
                         <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
